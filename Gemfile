@@ -25,6 +25,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'jazz_hands'
   gem 'quiet_assets'
 end
 
