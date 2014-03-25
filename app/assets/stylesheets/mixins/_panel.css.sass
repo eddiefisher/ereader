@@ -1,0 +1,72 @@
+%panel
+  -webkit-background-clip: padding-box
+  -moz-background-clip: padding
+  background-clip: padding-box
+  margin-bottom: 17px
+  background-color: #fff
+  border: 1px solid transparent
+  border-radius: 3px
+
+  .heading, .body
+    &:before, &:after
+      content: " "
+      display: table
+    &:after
+      clear: both
+
+  .heading
+    border-bottom: 1px solid transparent
+    border-top-right-radius: 3px
+    border-top-left-radius: 3px
+    & > .title
+      float: left
+      padding: 10px 15px
+      font-size: 14px
+    & > .options
+      float: right
+      padding-right: 8px
+      line-height: 3.15
+      a, span
+        display: inline-block
+        color: rgba(55,62,74,0.7)
+        text-decoration: none
+
+  .body
+    position: relative
+    padding: 15px
+
+@mixin panel_color($border, $background: '', $color: '', $fon_background: '', $fon_color: '')
+  border-color: $border
+  .heading
+    border-color: $border
+    @if $background != ''
+      background-color: $background
+    .title
+      color: $color
+    .options
+      a, span
+        color: $color
+  @if $fon_background != ''
+    .body
+      background-color: $fon_background
+      @if $fon_color != ''
+        color: $fon_color
+  & > .body + .body
+    border-top: 1px solid $border
+
+%panel_color_gray
+  @include panel_color($dark_gray, $gray, #373e4a)
+%panel_color_gray_full
+  @include panel_color(#fff, #eee, #373e4a, #eee)
+%panel_color_dark
+  @include panel_color($dark, $light_dark, #fff, $light_dark, #999)
+%panel_color_yellow
+  @include panel_color($yellow, $light_yellow, $brown)
+%panel_color_green
+  @include panel_color($green, $light_green, $dark_green)
+%panel_color_red
+  @include panel_color($red, $light_red, $dark_red)
+%panel_color_blue
+  @include panel_color($blue, $light_blue, $dark_blue)
+%panel_color_white
+  @include panel_color($gray, '', #373e4a)

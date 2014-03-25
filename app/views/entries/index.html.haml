@@ -1,0 +1,9 @@
+.entries
+  - @entries.each do |entry|
+    .entry
+      %span.title
+        = link_to entry.name, entry
+        \–
+      %span.summary
+        = strip_tags entry.summary
+      %span.date

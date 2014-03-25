@@ -1,0 +1,38 @@
+.container
+  @extend %container
+
+@each $gred in (6, 12)
+  .columns#{$gred}
+    @extend %columns#{$gred}
+
+.page_container
+  box-sizing: border-box
+  padding-left: 280px
+  &::before, &::after
+    content: " "
+    display: table
+
+.sidebar
+  position: fixed
+  width: 280px
+  top: 0
+  left: 0
+  bottom: 0
+  background: #303641
+  color: #aaabae
+  z-index: 1
+  ul
+    @extend %sidebar
+
+.main_content
+  min-height: 1420px
+  position: relative
+  float: left
+  width: 100%
+  padding: 20px
+  z-index: 2
+  background: #fff
+
+img
+  max-width: 100%
+  display: inline-block

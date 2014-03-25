@@ -1,0 +1,92 @@
+%button
+  position: relative
+  display: inline-block
+  font-weight: normal
+  text-decoration: none
+  white-space: nowrap
+  background-repeat: repeat-x
+  border: 1px solid #ddd
+  border-radius: 3px
+  vertical-align: middle
+  cursor: pointer
+  -webkit-touch-callout: none
+  -webkit-appearance: none
+  @include user-select(none)
+  outline: none
+  &:hover
+    text-decoration: none
+
+@mixin button_color($color, $background, $border, $hover_color, $hover_background, $hover_border)
+  @extend %button
+  color: $color
+  background-color: $background
+  border-color: $border
+  &:hover, &:active
+    color: $hover_color
+    background-color: $hover_background
+    border-color: $hover_border
+  &:active, &.active
+    box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.225)
+
+%button_color_default
+  @include button_color(#303641, #f0f0f1, #f0f0f1, #303641, #dbdbdd, #d0d0d3)
+%button_color_primary
+  @include button_color(#fff, #303641, #303641, #fff, #1f232a, #16191e)
+%button_color_blue
+  @include button_color(#fff, #0072bc, #0072bc, #fff, #005993, #004d7f)
+%button_color_red
+  @include button_color(#fff, #d42020, #d42020, #fff, #b11b1b, #9f1818)
+
+  // &:disabled, &:disabled:hover, &.disabled, &.disabled:hover
+
+%button_size_normal
+  padding: 6px 12px
+%button_size_small, %button_size_xsmall
+  font-size: 11px
+  line-height: 1.5
+  border-radius: 2px
+%button_size_small
+  padding: 5px 10px
+%button_size_xsmall
+  padding: 1px 5px
+
+/* button group */
+%button_group
+  display: inline-block
+  vertical-align: middle
+
+  &:before, &:after
+    content: " "
+    display: table
+
+  &:after
+    clear: both
+
+  .button
+    position: relative
+    float: left
+    border-radius: 0
+
+  .button:first-child
+    border-top-left-radius: 3px
+    border-bottom-left-radius: 3px
+
+  .button:last-child
+    border-top-right-radius: 3px
+    border-bottom-right-radius: 3px
+
+  .button:hover, .button:focus, .button:active, .button.selected
+    z-index: 2
+
+  .button+.button
+    margin-left: -1px
+    box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.2)
+
+  .button+.button:hover
+    box-shadow: none
+
+  .button+.button:active
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.15)
+
+  &+&, &+.button
+    margin-left: 5px
