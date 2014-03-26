@@ -1,15 +1,26 @@
-.entries, .entry
-  img
-    display: inline-block
-    max-height: 200px
-    border: 1px solid $dark_gray
-    border-radius: 3px
-    padding: 4px
-  .entry
+.index_entries
+  .index_entry
     border-bottom: 1px solid #ccc
-    @extend %truncate
     padding: 4px
-  .title a
-    color: #373e4a
-    text-decoration: none
-  .summary
+    .actions
+      width: 70px
+      height: 1em
+      display: inline-block
+      color: #777
+      .star_check, .star_uncheck,
+      .flag_check, .flag_uncheck,
+      .square_check, .square_uncheck
+        cursor: pointer
+    .header
+      @extend %truncate
+      width: calc(100% - 180px)
+      display: inline-block
+      .title a
+        color: #373e4a
+        text-decoration: none
+      .summary
+        color: $default
+    .date
+      width: 100px
+      text-align: right
+      display: inline-block

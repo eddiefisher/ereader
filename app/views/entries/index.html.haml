@@ -1,9 +1,16 @@
-.entries
+.index_entries
   - @entries.each do |entry|
-    .entry
-      %span.title
-        = link_to entry.name, entry
-        \–
-      %span.summary
-        = strip_tags entry.summary
+    .index_entry
+      .actions
+        %span.square_uncheck
+        %span.star_uncheck
+        %span.flag_uncheck
+      .header
+        %span.group_color_green
+        %span.title
+          = link_to entry.name, entry
+          \–
+        %span.summary
+          = strip_tags entry.summary
       %span.date
+        = entry.published_at.to_formatted_s(:short)
