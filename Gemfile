@@ -13,11 +13,17 @@ gem 'jbuilder', '~> 2.0'
 gem 'haml'
 gem 'bourbon'
 gem 'neat'
+gem 'font-awesome-rails'
 
 gem 'feedjira'
 gem 'ruby-readability',    require: 'readability'
 
 gem 'spring', group: :development
+
+gem 'whenever', :require => false
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
 
 group :development, :test do
   gem 'faker'
