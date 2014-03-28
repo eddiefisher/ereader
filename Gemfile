@@ -16,6 +16,8 @@ gem 'neat'
 gem 'font-awesome-rails'
 gem 'role-rails'
 
+gem 'devise'
+
 gem 'feedjira'
 gem 'ruby-readability',    require: 'readability'
 
