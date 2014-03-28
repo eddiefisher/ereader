@@ -14,6 +14,7 @@ gem 'haml'
 gem 'bourbon'
 gem 'neat'
 gem 'font-awesome-rails'
+gem 'role-rails'
 
 gem 'feedjira'
 gem 'ruby-readability',    require: 'readability'
