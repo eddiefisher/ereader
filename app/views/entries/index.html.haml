@@ -2,9 +2,9 @@
   - @entries.each do |entry|
     .index_entry
       .actions
-        %span.square_uncheck
-        %span.star_uncheck
-        %span.flag_uncheck
+        %span.square.uncheck{ role: 'check' }
+        %span.star.uncheck{ role: 'star' }
+        %span.flag.uncheck{ role: 'flag' }
       .header
         %span.group_color_green
         %span.title
