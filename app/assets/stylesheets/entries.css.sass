@@ -2,6 +2,9 @@
   .index_entry
     border-bottom: 1px solid #ccc
     padding: 4px
+    img
+      @extend %thumbnail
+      max-height: 200px
     .actions
       width: 70px
       height: 1em
@@ -24,3 +27,18 @@
       width: 100px
       text-align: right
       display: inline-block
+
+.entry
+  .empty_entry
+    margin-top: 20px
+    text-align: center
+    background-color: #c5e8f7
+    border-color: #c5e8f7
+    color: #2c7ea1
+    padding: 15px
+    margin-bottom: 17px
+    border: 1px solid transparent
+    border-radius: 3px
+
+  img
+    @extend %thumbnail

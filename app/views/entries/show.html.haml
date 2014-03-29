@@ -4,6 +4,7 @@
     = raw @entry.summary
   .body
     - if @entry.body.nil?
-      Body is not get yet
+      .empty_entry
+        Body is not get yet
     - else
       = raw @entry.body
