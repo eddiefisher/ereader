@@ -21,6 +21,7 @@ gem 'devise'
 gem 'feedjira'
 gem 'ruby-readability',    require: 'readability'
 
+gem 'carrierwave'
 gem 'spring', group: :development
 
 gem 'whenever', :require => false
@@ -36,6 +37,7 @@ end
 group :development do
   gem 'jazz_hands'
   gem 'quiet_assets'
+  gem 'pry-remote'
 end
 
 group :test do

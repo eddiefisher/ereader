@@ -13,6 +13,7 @@ class EntriesController < ApplicationController
   end
 
   private
+
   def entry
     @entry = Entry.find(params[:id]) if params[:id]
   end

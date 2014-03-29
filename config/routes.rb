@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :entries do
+
+  resources :import
+
+  resources :entries, only: [:index, :show] do
     collection do
       get 'channel/:channel_id', controller: 'entries', action: 'index', as: 'channel'
     end
