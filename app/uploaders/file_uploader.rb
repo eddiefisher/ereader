@@ -7,6 +7,6 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   def extension_white_list
-    %w(xml)
+    %w(xml opml)
   end
 end
