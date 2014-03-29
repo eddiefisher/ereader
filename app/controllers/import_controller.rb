@@ -20,15 +20,14 @@ class ImportController < ApplicationController
     params.require(:import).permit(:name, :user_id)
   end
 
-  def parse_opml(opml_node, parent_names=[])
-    opml_node.elements.map { |el| el.attributes if el.attributes['xmlUrl'] }.compact
+  def get_opml_feeds(opml_node, parent_names=[])
+    file = File.open(data.name.current_path, 'r')
+    opml = REXML::Document.new(file.read)
+    opml.elements['opml/body'].elements.map { |el| el.attributes if el.attributes['xmlUrl'] }.compact
   end
 
   def import_opml data
-    file = File.open(data.name.current_path, 'r')
-    opml = REXML::Document.new(file.read)
-    feeds = parse_opml(opml.elements['opml/body'])
-    feeds.each do |feed|
+    get_opml_feeds.each do |feed|
       Channel.create(
         text: feed['text'],
         title: feed['title'],
