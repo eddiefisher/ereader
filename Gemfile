@@ -20,6 +20,7 @@ gem 'devise'
 
 gem 'feedjira'
 gem 'ruby-readability',    require: 'readability'
+gem 'demoji'
 
 gem 'carrierwave'
 gem 'spring', group: :development
