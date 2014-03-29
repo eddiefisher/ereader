@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 10.minutes do
+every 30.minutes do
   runner "RssWorker.perform_async"
 end
