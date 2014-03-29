@@ -5,7 +5,8 @@
     = link_to 'Flaged', entries_path
   %li
     = link_to 'Important', entries_path
-  %li
-    = link_to entries_path do
-      Habrahabra
-      %span.group_color_green
+  - active_channels.each do |channel|
+    %li
+      = link_to channel_entries_path(channel) do
+        = channel.name
+        %span{class: "group_color_#{channel.color}"}

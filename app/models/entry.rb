@@ -1,21 +1,24 @@
 class Entry < ActiveRecord::Base
+  belongs_to :channel
+
   default_scope ->{ order(published_at: :desc) }
 
-  def self.update_from_feed(feed_url)
-    feed = Feedjira::Feed.fetch_and_parse(feed_url)
-    add_entries(feed.entries)
+  def self.update_from_feed(channel)
+    feed = Feedjira::Feed.fetch_and_parse(channel.url)
+    add_entries(feed.entries, channel)
   end
   
   private
   
-  def self.add_entries(entries)
+  def self.add_entries entries, channel
     entries.each do |entry|
       create!(
         :name         => entry.title,
         :summary      => entry.summary,
         :url          => entry.url,
         :published_at => entry.published,
-        :guid         => entry.id
+        :guid         => entry.id,
+        :channel_id   => channel.id
       ) unless exists?(:guid => entry.id)
     end
   end

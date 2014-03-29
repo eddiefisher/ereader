@@ -2,7 +2,11 @@ class EntriesController < ApplicationController
   before_filter :entry
 
   def index
-    @entries = Entry.all
+    if params.fetch(:channel_id, false)
+      @entries = Entry.includes(:channel).where(channel_id: params[:channel_id])
+    else
+      @entries = Entry.includes(:channel).all
+    end
   end
 
   def show    

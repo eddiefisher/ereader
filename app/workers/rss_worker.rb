@@ -4,7 +4,8 @@ class RssWorker
   # sidekiq_options retry: false
   
   def perform
-    logger.info "Sidekiq::Worker started"
-    Entry.update_from_feed('http://habrahabr.ru/rss/hubs/')
+    Channel.all.each do |channel|
+      Entry.update_from_feed(channel)
+    end
   end
 end

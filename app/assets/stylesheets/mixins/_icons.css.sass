@@ -9,7 +9,6 @@
     text-decoration: none !important
 
 %semaphore
-  background-color: rgb(130, 179, 91)
   border-radius: 100%
   border: 2px solid rgb(237, 237, 237)
   color: rgb(102, 102, 102)
@@ -17,3 +16,12 @@
   height: 11px
   text-align: center
   width: 11px
+%semaphore_color_green
+  @extend %semaphore
+  background-color: rgb(130, 179, 91)
+%semaphore_color_red
+  @extend %semaphore
+  background-color: #f56b6b
+%semaphore_color_orange
+  @extend %semaphore
+  background-color: #f38733

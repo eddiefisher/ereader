@@ -16,9 +16,17 @@
   @extend .fa-flag-o
 .square.check
   @extend .fa-check-square-o
+  &:before
+    margin-right: 0.4em
 .square.uncheck
   @extend .fa-square-o
 
 .group_color_green
-  @extend %semaphore
+  @extend %semaphore_color_green
+  margin: 0 5px
+.group_color_red
+  @extend %semaphore_color_red
+  margin: 0 5px
+.group_color_orange
+  @extend %semaphore_color_orange
   margin: 0 5px
