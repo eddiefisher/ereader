@@ -4,7 +4,7 @@ class Entry < ActiveRecord::Base
   default_scope ->{ order(published_at: :desc) }
 
   def self.update_from_feed(channel)
-    feed = Feedjira::Feed.fetch_and_parse(channel.url)
+    feed = Feedjira::Feed.fetch_and_parse(channel.xml_url)
     add_entries(feed.entries, channel)
   end
   

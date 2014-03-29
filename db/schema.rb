@@ -14,8 +14,11 @@
 ActiveRecord::Schema.define(version: 20140328184350) do
 
   create_table "channels", force: true do |t|
-    t.string   "name",       default: "",    null: false
-    t.string   "url",        default: "",    null: false
+    t.string   "text",       default: "",    null: false
+    t.string   "title",      default: "",    null: false
+    t.string   "feed_type",  default: "",    null: false
+    t.string   "xml_url",    default: "",    null: false
+    t.string   "html_url",   default: "",    null: false
     t.string   "color",      default: "",    null: false
     t.boolean  "locked",     default: false
     t.datetime "locked_at"

@@ -6,7 +6,7 @@
         %span.star.uncheck{ role: 'star' }
         %span.flag.uncheck{ role: 'flag' }
       .header
-        %span{ class: "group_color_#{entry.channel.color}", role: "tooltip", title: entry.channel.name, data: { placement: "bottom" } }
+        %span{ class: "group_color_#{entry.channel.color}", role: "tooltip", title: entry.channel.title, data: { placement: "bottom" } }
         %span.title
           = link_to entry.name, entry
           \–

@@ -8,5 +8,5 @@
   - active_channels.each do |channel|
     %li
       = link_to channel_entries_path(channel) do
-        = channel.name
+        = channel.title
         %span{class: "group_color_#{channel.color}"}
