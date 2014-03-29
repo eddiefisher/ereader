@@ -5,7 +5,9 @@ class Entry < ActiveRecord::Base
 
   def self.update_from_feed(channel)
     feed = Feedjira::Feed.fetch_and_parse(channel.xml_url)
-    add_entries(feed.entries, channel)
+    unless feed.is_a? Fixnum
+      add_entries(feed.entries, channel)
+    end
   end
   
   private
