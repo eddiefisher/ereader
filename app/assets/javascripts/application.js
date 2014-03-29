@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery.role
+//= require vendor/tooltip
 //= require_tree .
