@@ -13,4 +13,4 @@
         %span.summary
           = strip_tags entry.summary
       %span.date
-        = entry.published_at.to_formatted_s(:short)
+        = entry.published_at.to_formatted_s(:short) if entry.published_at
