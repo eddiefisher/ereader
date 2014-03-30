@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140329073506) do
+ActiveRecord::Schema.define(version: 20140329151413) do
 
   create_table "channels", force: true do |t|
     t.string   "text",       default: "",    null: false
@@ -30,9 +30,9 @@ ActiveRecord::Schema.define(version: 20140329073506) do
     t.string   "name"
     t.text     "summary"
     t.text     "body"
-    t.string   "url"
+    t.string   "url",          limit: 1000
     t.datetime "published_at"
-    t.string   "guid"
+    t.string   "guid",         limit: 1000
     t.integer  "channel_id"
     t.datetime "created_at"
     t.datetime "updated_at"
