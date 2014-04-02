@@ -1,5 +1,7 @@
 class Entry < ActiveRecord::Base
   include EntryReadable
+  include EntryFlagable
+  include EntryStarable
 
   belongs_to :channel
   default_scope ->{ order(published_at: :desc) }
