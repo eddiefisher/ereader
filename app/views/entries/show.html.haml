@@ -2,6 +2,7 @@
   %h3
     = @entry.name
     %small.original_entry
+      = link_to 'original entry', @entry.url, target: '_blank'
   - if @entry.body.nil?
     .summary
       = raw @entry.summary
