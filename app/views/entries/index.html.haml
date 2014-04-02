@@ -2,9 +2,9 @@
   - @entries.each do |entry|
     %div{ class: "index_entry #{entry.is_read?(current_user) ? 'read' : ''}"}
       .actions
-        %span.square.uncheck{ role: 'check' }
-        %span.star.uncheck{ role: 'star' }
-        %span.flag.uncheck{ role: 'flag' }
+        %span.square{ role: 'check' }
+        %span.star{ role: 'star' }
+        %span.flag{ role: 'flag' }
       .header
         %span{ class: "group_color_#{entry.channel.color}", role: "tooltip", title: entry.channel.title, data: { placement: "bottom" } }
         %span.title
