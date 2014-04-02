@@ -14,6 +14,11 @@ class EntriesController < ApplicationController
     @entry
   end
 
+  def get_body
+    @entry.get_body
+    redirect_to entry_path(@entry)
+  end
+
   private
 
   def entry

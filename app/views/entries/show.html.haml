@@ -1,10 +1,12 @@
 .entry
-  %h3= @entry.name
-  .summary
-    = raw @entry.summary
-  .body
-    - if @entry.body.nil?
+  %h3
+    = @entry.name
+    %small.original_entry
+  - if @entry.body.nil?
+    .summary
+      = raw @entry.summary
       .empty_entry
-        Body is not get yet
-    - else
+        = link_to 'Get body', get_body_entries_path(id: @entry.id), class: 'button'
+  - else
+    .body
       = raw @entry.body

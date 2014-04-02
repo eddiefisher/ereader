@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :entries, only: [:index, :show] do
     collection do
       get 'channel/:channel_id', controller: 'entries', action: 'index', as: 'channel'
+      get 'get_body', action: 'get_body', as: 'get_body'
     end
   end
   root 'entries#index'
