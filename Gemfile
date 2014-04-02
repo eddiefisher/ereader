@@ -18,6 +18,7 @@ gem 'font-awesome-rails'
 gem 'role-rails'
 
 gem 'devise'
+gem 'active_model_serializers'
 
 gem 'feedjira'
 gem 'ruby-readability',    require: 'readability'
