@@ -3,13 +3,14 @@ class EntriesController < ApplicationController
 
   def index
     if params.fetch(:channel_id, false)
-      @entries = Entry.includes(:channel).where(channel_id: params[:channel_id])
+      @entries = Entry.includes(:channel).where(channel_id: params[:channel_id]).where('entries.published_at > ?', 1.day.ago)
     else
-      @entries = Entry.includes(:channel).all
+      @entries = Entry.includes(:channel).where('entries.published_at > ?', 1.day.ago)
     end
   end
 
-  def show    
+  def show
+    respond_with @entry
   end
 
   private

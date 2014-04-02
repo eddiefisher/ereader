@@ -1,6 +1,7 @@
 class Entry < ActiveRecord::Base
-  belongs_to :channel
+  include EntryReadable
 
+  belongs_to :channel
   default_scope ->{ order(published_at: :desc) }
 
   def self.update_from_feed(channel)
@@ -9,9 +10,9 @@ class Entry < ActiveRecord::Base
       add_entries(feed.entries, channel)
     end
   end
-  
+
   private
-  
+
   def self.add_entries entries, channel
     entries.each do |entry|
       create!(

@@ -2,6 +2,10 @@
   .index_entry
     border-bottom: 1px solid #ccc
     padding: 4px
+    &:hover
+      background-color: rgba(0, 0, 0, 0.15)
+    &.read
+      background-color: rgba(0, 0, 0, 0.05)
     img
       @extend %thumbnail
       max-height: 200px
