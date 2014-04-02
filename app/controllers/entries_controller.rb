@@ -1,9 +1,9 @@
 class EntriesController < ApplicationController
-  before_filter :entry
+  before_action :entry
 
   def index
     if params.fetch(:channel_id, false)
-      @entries = Entry.includes(:channel).where(channel_id: params[:channel_id]).where('entries.published_at > ?', 1.day.ago)
+      @entries = Entry.includes(:channel).where(channel_id: params[:channel_id]).limit(20)
     else
       @entries = Entry.includes(:channel).where('entries.published_at > ?', 1.day.ago)
     end
