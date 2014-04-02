@@ -282,6 +282,7 @@ DEPENDENCIES
   pry-remote
   quiet_assets
   rails (= 4.1.0.rc1)
+  redis
   role-rails
   rspec
   rspec-rails
