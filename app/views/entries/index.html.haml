@@ -1,6 +1,6 @@
 .index_entries
   - @entries.each do |entry|
-    .index_entry
+    %div{ class: "index_entry #{entry.is_read?(current_user) ? 'read' : ''}"}
       .actions
         %span.square.uncheck{ role: 'check' }
         %span.star.uncheck{ role: 'star' }

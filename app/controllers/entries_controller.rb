@@ -10,7 +10,8 @@ class EntriesController < ApplicationController
   end
 
   def show
-    respond_with @entry
+    @entry.read!(current_user)
+    @entry
   end
 
   private
