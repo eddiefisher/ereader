@@ -1,6 +1,6 @@
 module EntryStarable
   extend ActiveSupport::Concern
-  
+
   def star!(user)
     $redis.sadd(self.redis_key(:star_by), user.id)
   end
@@ -15,5 +15,5 @@ module EntryStarable
 
   def redis_key(str)
     "entry:#{self.id}:#{str}"
-  end  
+  end
 end

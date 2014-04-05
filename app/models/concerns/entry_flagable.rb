@@ -1,6 +1,6 @@
 module EntryFlagable
   extend ActiveSupport::Concern
-  
+
   def flag!(user)
     $redis.sadd(self.redis_key(:flag_by), user.id)
   end
@@ -15,5 +15,5 @@ module EntryFlagable
 
   def redis_key(str)
     "entry:#{self.id}:#{str}"
-  end  
+  end
 end

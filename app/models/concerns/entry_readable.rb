@@ -1,6 +1,6 @@
 module EntryReadable
   extend ActiveSupport::Concern
-  
+
   def read!(user)
     $redis.sadd(self.redis_key(:read_by), user.id)
   end
@@ -15,5 +15,5 @@ module EntryReadable
 
   def redis_key(str)
     "entry:#{self.id}:#{str}"
-  end  
+  end
 end
