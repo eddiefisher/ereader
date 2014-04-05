@@ -1,11 +1,12 @@
 .index_entries
   .index_entry
     border-bottom: 1px solid #ccc
+    background-color: rgba(0, 0, 0, 0.05)
     padding: 4px
     &:hover, &.read:hover
       background-color: rgba(0, 0, 0, 0.15)
     &.read
-      background-color: rgba(0, 0, 0, 0.05)
+      background-color: #fff
     img
       @extend %thumbnail
       max-height: 200px
@@ -47,7 +48,3 @@
       @extend %button
       @extend %button_color_blue
       @extend %button_size_normal
-  img
-    @extend %thumbnail
-  .original_entry
-    @extend %link
