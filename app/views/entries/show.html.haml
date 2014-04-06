@@ -1,15 +1,13 @@
-.entry
+.entry{role: 'show_entry'}
   %h3
     = @entry.name
-    %small.original_entry
-      = link_to 'original entry', @entry.url, target: '_blank'
   %small.channel
-    = @entry.channel.title
+    = link_to @entry.channel.title, @entry.url, target: '_blank'
   - if @entry.body.nil?
     .summary
       = raw @entry.summary
       .empty_entry
-        = link_to 'Get body', get_body_entries_path(id: @entry.id), class: 'button'
+        = link_to 'Get body', get_body_entries_path(id: @entry.id), class: 'button', remote: true, data: {disable_with: 'Geting... body'}
   - else
     .body
       = raw @entry.body
