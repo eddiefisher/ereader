@@ -16,11 +16,7 @@ class Entry < ActiveRecord::Base
   def get_body
     source = open(self.url, "User-Agent" => "Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25").read
 
-    if ['http://habrahabr.ru/rss/hubs/', 'http://habrahabr.ru/rss/new/'].include?(self.channel.xml_url)
-      content = get_habrahabra_content source
-    else
-      content = get_readability_content source
-    end
+    content = get_filtered_content source
 
     update_attributes(body: content)
     update_attributes(summary: content) if self.summary.blank?
@@ -41,6 +37,14 @@ class Entry < ActiveRecord::Base
     end
   end
 
+  def get_filtered_content source
+    if ['http://habrahabr.ru/rss/hubs/', 'http://habrahabr.ru/rss/new/'].include?(self.channel.xml_url)
+      get_habrahabra_content source
+    else
+      get_readability_content source
+    end
+  end
+
   def get_readability_content source
     results = Readability::Document.new(source,
                               tags: %w[div p br img a h1 h2 h3 h4 h5 h6 strong code pre span b i blockquote ul ol li dd dt],
@@ -52,7 +56,11 @@ class Entry < ActiveRecord::Base
 
   def get_habrahabra_content source
     results = Nokogiri::HTML(source)
-    results.css('.content.html_format').to_s
+    content = results.css('.content.html_format').to_s
+    if content.blank?
+      content = results.css('#reg-wrapper').to_s
+    end
+    content
   end
 
 end
