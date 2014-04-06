@@ -16,7 +16,7 @@ class Entry < ActiveRecord::Base
   def get_body
     source = open(self.url, "User-Agent" => "Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25").read
     @results = Readability::Document.new( source,
-                                          tags: %w[div p img a h1 h2 h3 h4 h5 h6 strong code pre span b i blockquote ul ol li dd dt],
+                                          tags: %w[div p br img a h1 h2 h3 h4 h5 h6 strong code pre span b i blockquote ul ol li dd dt],
                                           attributes: %w[src href class],
                                           remove_empty_nodes: false,
                                           remove_unlikely_candidates: false)
