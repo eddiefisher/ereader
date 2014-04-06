@@ -20,8 +20,15 @@ class Entry < ActiveRecord::Base
                                           attributes: %w[src href class],
                                           remove_empty_nodes: false,
                                           remove_unlikely_candidates: false)
-    update_attributes(body: @results.content)
-    update_attributes(summary: @results.content) if self.summary.blank?
+    content = @results.content
+
+    if ['http://habrahabr.ru/rss/hubs/', 'http://habrahabr.ru/rss/new/'].include?(self.channel.xml_url)
+      page = Nokogiri::HTML(@results.content)
+      content = page.css('.content.html_format').to_s
+    end
+
+    update_attributes(body: content)
+    update_attributes(summary: content) if self.summary.blank?
   end
 
   private
