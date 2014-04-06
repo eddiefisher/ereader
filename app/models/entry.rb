@@ -15,16 +15,11 @@ class Entry < ActiveRecord::Base
 
   def get_body
     source = open(self.url, "User-Agent" => "Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25").read
-    @results = Readability::Document.new( source,
-                                          tags: %w[div p br img a h1 h2 h3 h4 h5 h6 strong code pre span b i blockquote ul ol li dd dt],
-                                          attributes: %w[src href class],
-                                          remove_empty_nodes: false,
-                                          remove_unlikely_candidates: false)
-    content = @results.content
 
     if ['http://habrahabr.ru/rss/hubs/', 'http://habrahabr.ru/rss/new/'].include?(self.channel.xml_url)
-      page = Nokogiri::HTML(@results.content)
-      content = page.css('.content.html_format').to_s
+      content = get_habrahabra_content source
+    else
+      content = get_readability_content source
     end
 
     update_attributes(body: content)
@@ -44,6 +39,20 @@ class Entry < ActiveRecord::Base
         :channel_id   => channel.id
       ) unless exists?(:guid => entry.id)
     end
+  end
+
+  def get_readability_content source
+    results = Readability::Document.new(source,
+                              tags: %w[div p br img a h1 h2 h3 h4 h5 h6 strong code pre span b i blockquote ul ol li dd dt],
+                              attributes: %w[src href class],
+                              remove_empty_nodes: false,
+                              remove_unlikely_candidates: false)
+    results.content
+  end
+
+  def get_habrahabra_content source
+    results = Nokogiri::HTML(source)
+    results.css('.content.html_format').to_s
   end
 
 end
