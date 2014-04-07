@@ -7,7 +7,7 @@
     = link_to 'Important', entries_path
   - active_channels.each do |channel|
     %li
-      = link_to channel_entries_path(channel) do
+      = link_to channel_entries_path(channel), remote: true do
         = channel.title
         %span{class: "group_color_#{channel.color}"}
   %li

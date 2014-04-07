@@ -1,6 +1,7 @@
 class EntriesController < ApplicationController
   before_action :entry
   respond_to :html, :js
+
   def index
     if params.fetch(:channel_id, false)
       @entries = Entry.includes(:channel).where(channel_id: params[:channel_id]).limit(20)

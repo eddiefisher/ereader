@@ -1,16 +1,1 @@
-.index_entries
-  - @entries.each do |entry|
-    %div{ class: "index_entry #{entry.is_read?(current_user) ? 'read' : ''}"}
-      .actions
-        %span.square{ role: 'check' }
-        %span.star{ role: 'star' }
-        %span.flag{ role: 'flag' }
-      .header
-        %span{ class: "group_color_#{entry.channel.color}", role: "tooltip", title: entry.channel.title, data: { placement: "bottom" } }
-        %span.title
-          = link_to entry.name, entry
-          \–
-        %span.summary
-          = strip_tags entry.summary
-      %span.date
-        = entry.published_at.to_formatted_s(:short) if entry.published_at
+= render 'entry_list'
