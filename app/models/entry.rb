@@ -6,6 +6,10 @@ class Entry < ActiveRecord::Base
   belongs_to :channel
   default_scope ->{ order(published_at: :desc) }
 
+  def self.batch
+    %w{read unread flag unflag star unstar}
+  end
+
   def self.update_from_feed(channel)
     feed = Feedjira::Feed.fetch_and_parse(channel.xml_url)
     unless feed.is_a? Fixnum
@@ -14,7 +18,7 @@ class Entry < ActiveRecord::Base
   end
 
   def get_body
-    source = open(self.url, "User-Agent" => "Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5355d Safari/8536.25").read
+    source = open(self.url, "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/537.75.14").read
 
     content = get_filtered_content source
 

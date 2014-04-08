@@ -9,8 +9,12 @@ module EntryReadable
     $redis.srem(self.redis_key(:read_by), user.id)
   end
 
-  def is_read?(user)
+  def is_readed?(user)
     $redis.sismember(self.redis_key(:read_by), user.id)
+  end
+
+  def is_unreaded?(user)
+    !$redis.sismember(self.redis_key(:read_by), user.id)
   end
 
   def redis_key(str)

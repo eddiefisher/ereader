@@ -1,8 +1,11 @@
-%div{ class: "index_entry #{entry.is_read?(current_user) ? 'read' : ''}"}
+%div{ class: "index_entry #{entry.is_readed?(current_user) ? 'read' : ''}", id: "entry_#{entry.id}"}
   .actions
     %span.square{ role: 'check' }
-    %span.star{ role: 'star' }
-    %span.flag{ role: 'flag' }
+    = check_box_tag 'entry[ids][]', entry.id, false
+    = link_to action_entries_path(entry, entry.is_stared?(current_user) ? :unstar : :star), remote: true, method: :post do
+      %span.star{ role: 'star', class: entry.is_stared?(current_user) ? 'check' : '' }
+    = link_to action_entries_path(entry, entry.is_stared?(current_user) ? :unflag : :flag), remote: true, method: :post do
+      %span.flag{ role: 'flag', class: entry.is_flaged?(current_user) ? 'check' : '' }
   .header
     %span{ class: "group_color_#{entry.channel.color}", role: "tooltip", title: entry.channel.title, data: { placement: "bottom" } }
     %span.title

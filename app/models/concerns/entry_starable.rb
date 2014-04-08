@@ -9,8 +9,12 @@ module EntryStarable
     $redis.srem(self.redis_key(:star_by), user.id)
   end
 
-  def is_star?(user)
+  def is_stared?(user)
     $redis.sismember(self.redis_key(:star_by), user.id)
+  end
+
+  def is_unstared?(user)
+    !$redis.sismember(self.redis_key(:star_by), user.id)
   end
 
   def redis_key(str)

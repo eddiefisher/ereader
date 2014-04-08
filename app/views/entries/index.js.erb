@@ -1,1 +1,1 @@
-$('@main_content').html("<%=j render 'entry_list' %>")
+$('@index_entries').html("<%=j render partial: 'entry_list_item', collection: @entries, as: :entry %>")

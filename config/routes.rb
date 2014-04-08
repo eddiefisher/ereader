@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :import
+  resources :import, only: [:index, :create]
 
   resources :entries, only: [:index, :show] do
     collection do
       get 'channel/:channel_id', controller: 'entries', action: 'index', as: 'channel'
       get 'get_body', action: 'get_body', as: 'get_body'
+      post "action/:id/:method", action: "action", as: "action"
+      post "batch_actions", action: "batch_actions", as: "batch_actions"
     end
   end
   root 'entries#index'

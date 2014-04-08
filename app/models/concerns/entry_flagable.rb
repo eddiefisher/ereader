@@ -13,6 +13,10 @@ module EntryFlagable
     $redis.sismember(self.redis_key(:flag_by), user.id)
   end
 
+  def is_unflaged?(user)
+    !$redis.sismember(self.redis_key(:flag_by), user.id)
+  end
+
   def redis_key(str)
     "entry:#{self.id}:#{str}"
   end

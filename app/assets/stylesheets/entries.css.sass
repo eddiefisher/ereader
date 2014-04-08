@@ -1,3 +1,15 @@
+.actions_menu
+  border-bottom: 1px solid #ccc
+  padding: 4px
+  a
+    color: #333
+  a:hover
+    color: $dark_red
+  button
+    @extend %button
+    @extend %button_color_blue
+    @extend %button_size_small
+
 .index_entries
   .index_entry
     border-bottom: 1px solid #ccc
@@ -19,6 +31,11 @@
       .flag.check, .flag,
       .square.check, .square
         cursor: pointer
+      input[type="checkbox"]
+        display: none
+      a
+        text-decoration: none
+        color: #777
     .header
       @extend %truncate
       width: calc(100% - 180px)
@@ -33,7 +50,7 @@
       text-align: right
       display: inline-block
 
-.entry
+.show_entry
   h3
     font-family: times, Times New Roman, times-roman, georgia, serif
     font-weight: bold
