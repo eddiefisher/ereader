@@ -10,6 +10,13 @@ $(document).on 'click', '@check_all', ->
   $(@).toggleClass('check')
   $('@check').toggleClass('check')
 
+  $('@check').each (i, v)->
+    $checkbox = $(v).closest('.actions').find('input[type="checkbox"]')
+    if $checkbox.is ':checked'
+      $checkbox.prop('checked', false)
+    else
+      $checkbox.prop('checked', true)
+
 $(document).on 'click', '.index_entry', ->
   $(@).addClass('read')
 

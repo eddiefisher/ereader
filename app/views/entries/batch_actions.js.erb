@@ -1,3 +1,4 @@
 <%- @entries.each do |entry| %>
   $('#entry_<%= entry.id %>').replaceWith('<%=j render "entry_list_item", entry: entry %>')
+  $('@check_all').toggleClass('check')
 <% end -%>
