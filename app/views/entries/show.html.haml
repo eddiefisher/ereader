@@ -4,7 +4,7 @@
   %small.channel
     = link_to @entry.channel.title, @entry.url, target: '_blank'
     = @entry.published_at.to_formatted_s(:long)
-  - if @entry.body.nil?
+  - if @entry.body.blank?
     .summary
       = raw @entry.summary
       .empty_entry
