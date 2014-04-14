@@ -19,7 +19,6 @@ class Entry < ActiveRecord::Base
 
   def get_body
     content = get_filtered_content
-    content = get_readability_content if content.blank?
 
     update_attributes(body: content)
     update_attributes(summary: content) if self.summary.blank?
@@ -68,27 +67,38 @@ class Entry < ActiveRecord::Base
 
   def get_filtered_content
     path = self.channel.xml_url
-    if ['http://habrahabr.ru/rss/hubs/', 'http://habrahabr.ru/rss/new/'].include?(path)
-      get_habrahabra_content
+    content = ''
+    if path.include?('habrahabr.ru')
+      content = get_habrahabra_content
     elsif path.include?('livejournal.com')
-      get_livejournal_content
+      content = get_livejournal_content
+    elsif path.include?('xkcd.com')
+      content = get_xkcd_com_content
+    elsif path.include?('opennet.ru')
+      content = cp1251_to_utf8 get_readability_content
     else
-      get_readability_content
+      content = get_readability_content
     end
+    content
   end
 
   def get_habrahabra_content
     results = Nokogiri::HTML(source)
-    content = results.css('.content.html_format').to_s
-    if content.blank?
-      content = results.css('#reg-wrapper').to_s
-    end
-    content
+    content = results.css('.content.html_format').to_s || results.css('#reg-wrapper').to_s if content.blank?
   end
 
   def get_livejournal_content
     results = Nokogiri::HTML(source)
-    content = results.css('.b-singlepost-body').to_s
-    content
+    results.css('.b-singlepost-body').to_s
+  end
+
+  def get_xkcd_com_content
+    results = Nokogiri::HTML(source)
+    results.css('#comic').to_s
+  end
+
+  def cp1251_to_utf8 data
+    # data.force_encoding("koi8-r").encode("utf8", undef: :replace)
+    Iconv.conv('UTF-8//IGNORE', 'KOI8-R', data)
   end
 end
