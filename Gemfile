@@ -21,13 +21,13 @@ gem 'devise'
 gem 'active_model_serializers'
 
 gem 'feedjira'
-gem 'ruby-readability',    require: 'readability'
+gem 'ruby-readability', require: 'readability'
 gem 'demoji'
 
 gem 'carrierwave'
-gem 'spring', group: :development
+gem 'iconv'
 
-gem 'whenever', :require => false
+gem 'whenever', require: false
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
@@ -41,6 +41,7 @@ group :development do
   gem 'jazz_hands'
   gem 'quiet_assets'
   gem 'pry-remote'
+  gem 'spring'
 end
 
 group :test do

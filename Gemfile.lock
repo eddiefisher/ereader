@@ -99,6 +99,7 @@ GEM
     hike (1.2.3)
     hirb (0.7.1)
     i18n (0.6.9)
+    iconv (1.0.4)
     jazz_hands (0.5.2)
       awesome_print (~> 1.2)
       coolline (>= 0.4.2)
@@ -275,6 +276,7 @@ DEPENDENCIES
   feedjira
   font-awesome-rails
   haml
+  iconv
   jazz_hands
   jbuilder (~> 2.0)
   jquery-rails
