@@ -7,10 +7,10 @@
   - if @entry.body.blank?
     .summary
       = preserve do
-        = raw @entry.summary.gsub("\t", "  ")
+        = raw @entry.summary.gsub("\t", "  ").gsub("<br><br>", "<br>") unless @entry.summary.nil?
       .empty_entry
         = link_to 'Get body', get_body_entries_path(id: @entry.id), class: 'button', remote: true, data: {disable_with: 'Geting... body'}
   - else
     .body
       = preserve do
-        = raw @entry.body.gsub("\t", "  ")
+        = raw @entry.body.gsub("\t", "  ").gsub("<br><br>", "<br>") unless @entry.summary.nil?
