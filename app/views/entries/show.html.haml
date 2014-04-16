@@ -13,4 +13,4 @@
   - else
     .body
       = preserve do
-        = raw @entry.body.gsub("\t", "  ").gsub("<br><br>", "<br>") unless @entry.summary.nil?
+        = raw @entry.body unless @entry.summary.nil?
