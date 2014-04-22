@@ -47,7 +47,7 @@ class Entry < ActiveRecord::Base
 
       create!(
         :name         => entry.title,
-        :summary      => content_filter(entry.summary, true),
+        :summary      => entry.summary,
         :url          => url,
         :published_at => published,
         :guid         => entry.id,

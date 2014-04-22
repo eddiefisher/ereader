@@ -22,5 +22,5 @@
 set :environment, :development
 
 every 30.minutes do
-  runner "RssWorker.perform_async"
+  runner 'RssWorker.perform_async'
 end
