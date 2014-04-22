@@ -38,10 +38,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'jazz_hands'
   gem 'quiet_assets'
-  gem 'pry-remote'
-  gem 'spring'
 end
 
 group :test do
