@@ -13,4 +13,3 @@ $(document).on 'page:update', ->
 
 $(document).on 'mouseenter', '@tooltip', ->
   $('@tooltip').tooltip()
-

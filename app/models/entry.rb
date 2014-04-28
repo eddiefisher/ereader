@@ -81,6 +81,8 @@ class Entry < ActiveRecord::Base
       content = get_xkcd_com_content
     elsif path.include?('seasonvar.ru')
       content = get_seasonvar_content
+    elsif path.include?('opennet.ru')
+      content = get_opennet_content
     end
 
     if content
@@ -121,6 +123,11 @@ class Entry < ActiveRecord::Base
     results = Nokogiri::HTML(source)
     results.css('.rating, script').remove
     results.css('.full-news-1')
+  end
+
+  def get_opennet_content
+    results = Nokogiri::HTML(source)
+    results.css('#r_memo')
   end
 
   def sanitize(node, options = {})
