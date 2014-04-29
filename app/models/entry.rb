@@ -26,10 +26,6 @@ class Entry < ActiveRecord::Base
 
   private
 
-  def source
-    open(self.url, "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/537.75.14").read
-  end
-
   def self.add_entries entries, channel
     entries.each do |entry|
       published = entry.published || Time.now
@@ -56,116 +52,27 @@ class Entry < ActiveRecord::Base
     end
   end
 
-  def get_readability_content
-    results = Readability::Document.new source, readability_options
-    results.content
-  end
-
-  def readability_options
-    {
-      tags: %w[div p br img a h1 h2 h3 h4 h5 h6 strong code pre span b i blockquote ul ol li dd dt],
-      attributes: %w[src href align],
-      remove_empty_nodes: false,
-      remove_unlikely_candidates: false
-    }
+  def source
+    open(self.url, "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/537.75.14").read
   end
 
   def get_filtered_content
     path = self.channel.xml_url
-    content = false
+    content = ''
     if path.include?('habrahabr.ru')
-      content = get_habrahabra_content
+      content = ContentFactory.new(source, [:habrahabr, :sanitize])
     elsif path.include?('livejournal.com')
-      content = get_livejournal_content
+      content = ContentFactory.new(source, [:livejournal, :sanitize])
     elsif path.include?('xkcd.com')
-      content = get_xkcd_com_content
+      content = ContentFactory.new(source, [:xkcd, :sanitize])
     elsif path.include?('seasonvar.ru')
-      content = get_seasonvar_content
+      content = ContentFactory.new(source, [:seasonvar, :sanitize])
     elsif path.include?('opennet.ru')
-      content = get_opennet_content
-    end
-
-    if content
-      content_filter content
+      content = ContentFactory.new(source, [:opennet, :sanitize])
     else
-      get_readability_content
-    end
-  end
-
-  def content_filter content
-    content = sanitize(content, readability_options)
-    content = content.gsub("<br><blockquote>", "<blockquote>").gsub(/<\/blockquote>(\n)<br>/, "</blockquote>")
-    content = content.gsub("<br/><blockquote>", "<blockquote>").gsub("</blockquote><br/>", "</blockquote>")
-    content = content.gsub("<a></a>", "")
-    content = content.gsub("\t", "  ").gsub("<br><br>", "<br>")
-  end
-
-  def get_habrahabra_content
-    results = Nokogiri::HTML(source)
-    content = results.css('.content.html_format')
-    if content.blank?
-      content = results.css('#reg-wrapper')
-    end
-    content
-  end
-
-  def get_livejournal_content
-    results = Nokogiri::HTML(source)
-    results.css('.b-singlepost-body')
-  end
-
-  def get_xkcd_com_content
-    results = Nokogiri::HTML(source)
-    results.css('#comic')
-  end
-
-  def get_seasonvar_content
-    results = Nokogiri::HTML(source)
-    results.css('.rating, script').remove
-    results.css('.full-news-1')
-  end
-
-  def get_opennet_content
-    results = Nokogiri::HTML(source)
-    results.css('#r_memo')
-  end
-
-  def sanitize(node, options = {})
-    node.css("form, object, iframe, embed").each do |elem|
-      elem.remove
+      content = ContentFactory.new(source, [:readabilityfilter])
     end
 
-    node.css("p, a").each do |elem|
-      unless elem.css('*').to_a.count > 0
-        elem.remove if elem.content.strip.empty?
-      end
-    end
-
-    base_whitelist = options[:tags] || %w[div p]
-    base_replace_with_whitespace = %w[br hr h1 h2 h3 h4 h5 h6 dl dd ol li ul address blockquote center]
-
-    whitelist = Hash.new
-    base_whitelist.each {|tag| whitelist[tag] = true }
-    replace_with_whitespace = Hash.new
-    base_replace_with_whitespace.each { |tag| replace_with_whitespace[tag] = true }
-
-    node.css("*").each do |el|
-      if whitelist[el.node_name]
-        el.attributes.each { |a, x| el.delete(a) unless options[:attributes] && options[:attributes].include?(a.to_s) }
-      else
-        if el.parent.nil?
-          node = Nokogiri::XML::Text.new(el.text, el.document)
-          break
-        else
-          if replace_with_whitespace[el.node_name]
-            el.swap(Nokogiri::XML::Text.new(' ' << el.text << ' ', el.document))
-          else
-            el.swap(Nokogiri::XML::Text.new(el.text, el.document))
-          end
-        end
-      end
-    end
-
-    return node.to_s.gsub(/[\r\n\f]+/, "\n" )
+    content.result
   end
 end
