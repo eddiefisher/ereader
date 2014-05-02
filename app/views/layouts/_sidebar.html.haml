@@ -5,10 +5,10 @@
     = link_to 'Flaged', entries_path
   %li
     = link_to 'Important', entries_path
-  - active_channels.each do |channel|
-    %li
-      = link_to channel_entries_path(channel) do
-        = channel.title
-        %span{class: "group_color_#{channel.color}"}
+  / - active_channels.each do |channel|
+  /   %li
+  /     = link_to channel_entries_path(channel) do
+  /       = channel.title
+  /       %span{class: "group_color_#{channel.color}"}
   %li
     = link_to 'Import from OPML', import_index_path
