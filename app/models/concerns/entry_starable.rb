@@ -1,23 +1,28 @@
 module EntryStarable
   extend ActiveSupport::Concern
 
-  def star!(user)
-    $redis.sadd(self.redis_key(:star_by), user.id)
+  def star(value)
+    $redis.sadd(self.redis_key(:star), value)
   end
 
-  def unstar!(user)
-    $redis.srem(self.redis_key(:star_by), user.id)
+  def unstar(value)
+    $redis.srem(self.redis_key(:star), value)
   end
 
-  def is_stared?(user)
-    $redis.sismember(self.redis_key(:star_by), user.id)
+  def is_stared?(value)
+    $redis.sismember(self.redis_key(:star), value)
   end
 
-  def is_unstared?(user)
-    !$redis.sismember(self.redis_key(:star_by), user.id)
+  def is_unstared?(value)
+    !$redis.sismember(self.redis_key(:star), value)
+  end
+
+  def stared_entry
+    ids = $redis.smembers(self.redis_key(:star))
+    Entry.where(:id => ids)
   end
 
   def redis_key(str)
-    "entry:#{self.id}:#{str}"
+    "user:#{self.id}:#{str}"
   end
 end

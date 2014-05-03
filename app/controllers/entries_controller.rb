@@ -10,21 +10,31 @@ class EntriesController < ApplicationController
     end
   end
 
+  def flaged
+    @entries = current_user.flaged_entry
+    render :index
+  end
+
+  def stared
+    @entries = current_user.stared_entry
+    render :index
+  end
+
   def show
-    @entry.read!(current_user)
+    current_user.read(@entry.id)
     @entry
   end
 
   def action
     @method = params[:method]
     @entry = Entry.find(params[:id])
-    @entry.send("#{params[:method]}!", current_user) unless @entry.send("is_#{@method}ed?", current_user)
+    entry_action @entry, @method
   end
 
   def batch_actions
     @method = params['method']
     @entries = Entry.where(id: params[:entry][:ids])
-    @entries.each { |entry| entry.send("#{params[:method]}!", current_user) unless entry.send("is_#{params[:method]}ed?", current_user) }
+    @entries.each { |entry| entry_action entry, @method }
   end
 
   def get_body
@@ -35,5 +45,9 @@ class EntriesController < ApplicationController
 
   def entry
     @entry = Entry.find(params[:id]) if params[:id]
+  end
+
+  def entry_action entry, method
+    current_user.send("#{method}", entry.id) unless current_user.send("is_#{method}ed?", entry.id)
   end
 end
