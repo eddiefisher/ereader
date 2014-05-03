@@ -9,15 +9,15 @@ module EntryFlagable
     $redis.srem(self.redis_key(:flag), value)
   end
 
-  def is_flaged?(value)
+  def is_flagged?(value)
     $redis.sismember(self.redis_key(:flag), value)
   end
 
-  def is_unflaged?(value)
+  def is_unflagged?(value)
     !$redis.sismember(self.redis_key(:flag), value)
   end
 
-  def flaged_entry
+  def flagged_entry
     ids = $redis.smembers(self.redis_key(:flag))
     Entry.where(:id => ids)
   end

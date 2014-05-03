@@ -9,15 +9,15 @@ module EntryStarable
     $redis.srem(self.redis_key(:star), value)
   end
 
-  def is_stared?(value)
+  def is_starred?(value)
     $redis.sismember(self.redis_key(:star), value)
   end
 
-  def is_unstared?(value)
+  def is_unstarred?(value)
     !$redis.sismember(self.redis_key(:star), value)
   end
 
-  def stared_entry
+  def starred_entry
     ids = $redis.smembers(self.redis_key(:star))
     Entry.where(:id => ids)
   end

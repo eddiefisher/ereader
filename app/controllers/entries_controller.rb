@@ -10,13 +10,13 @@ class EntriesController < ApplicationController
     end
   end
 
-  def flaged
-    @entries = current_user.flaged_entry
+  def flagged
+    @entries = current_user.flagged_entry
     render :index
   end
 
-  def stared
-    @entries = current_user.stared_entry
+  def starred
+    @entries = current_user.starred_entry
     render :index
   end
 
