@@ -11,17 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140329151413) do
+ActiveRecord::Schema.define(version: 20140503082551) do
 
   create_table "channels", force: true do |t|
-    t.string   "text",       default: "",    null: false
-    t.string   "title",      default: "",    null: false
-    t.string   "feed_type",  default: "",    null: false
-    t.string   "xml_url",    default: "",    null: false
-    t.string   "html_url",   default: "",    null: false
-    t.string   "color",      default: "",    null: false
-    t.boolean  "locked",     default: false
+    t.string   "text",          default: "",    null: false
+    t.string   "title",         default: "",    null: false
+    t.string   "feed_type",     default: "",    null: false
+    t.string   "xml_url",       default: "",    null: false
+    t.string   "html_url",      default: "",    null: false
+    t.string   "color",         default: "",    null: false
+    t.boolean  "locked",        default: false
     t.datetime "locked_at"
+    t.string   "last_feed_sha"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
