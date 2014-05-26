@@ -4,8 +4,6 @@
     %title Ereader
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    %link{ rel: "stylesheet", href: "http://yandex.st/highlightjs/8.0/styles/default.min.css" }
-    %script{ src: "http://yandex.st/highlightjs/8.0/highlight.min.js" }
     = csrf_meta_tags
   %body{ id: rand(10..20) }
     .page_container
@@ -18,5 +16,9 @@
           = alert
         .container
           = yield
-    .loading.hidden{role: :loading}
+    .loading.hidden{ role: :loading }
       Loading...
+
+    %link{ rel: "stylesheet", href: "http://yandex.st/highlightjs/8.0/styles/default.min.css" }
+    %script{ src: "http://yandex.st/highlightjs/8.0/highlight.min.js" }
+    %link{ rel: "stylesheet", href: "http://fonts.googleapis.com/css?family=Lato" }
