@@ -48,6 +48,14 @@ class EntriesController < ApplicationController
   end
 
   def entry_action entry, method
-    current_user.send("#{method}", entry.id) unless current_user.send("is_#{method}ed?", entry.id)
+    current_user.send("#{method}", entry.id) unless current_user.send("is_#{prepare_method(method)}ed?", entry.id)
+  end
+
+  def prepare_method method
+    if method == 'star' or method == 'unstar'
+      "#{method}r"
+    elsif method == 'flag' or method == 'unflag'
+      "#{method}g"
+    end
   end
 end
