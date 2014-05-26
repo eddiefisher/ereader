@@ -23,16 +23,24 @@ class Entry < ActiveRecord::Base
       end
     end
 
-    private
-
-    def add_entries entries, channel
+  def add_entries entries, channel
       entries.each do |entry|
+        if entry.url.include?('utm_')
+          uri = URI(entry.url)
+          uri_params = CGI.parse(uri.query)
+          blacklist = %w[utm_source utm_medium utm_campaign]
+          uri.query = URI.encode_www_form( uri_params.select { |h, key| !blacklist.include?(h) } )
+          entry.url = uri.to_s
+        else
+          entry.url
+        end
+
         published = entry.published || Time.now
 
         create!(
           :name         => entry.title,
           :summary      => entry.summary,
-          :url          => entry.cleaned_url,
+          :url          => entry.url,
           :published_at => published,
           :guid         => entry.id,
           :channel_id   => channel.id
@@ -41,19 +49,7 @@ class Entry < ActiveRecord::Base
     end
   end
 
-  private
-
-  def cleaned_url
-    if entry.url.include?('utm_')
-      uri = URI(entry.url)
-      uri_params = CGI.parse(uri.query)
-      blacklist = %w[utm_source utm_medium utm_campaign]
-      uri.query = URI.encode_www_form( uri_params.select { |h, key| !blacklist.include?(h) } )
-      uri.to_s
-    else
-      entry.url
-    end
-  end
+private
 
   def source
     open(url, "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/537.75.14").read
