@@ -51,18 +51,22 @@
       display: inline-block
 
 .show_entry
+  padding-right: 15%
+  padding-left: 5%
   h3
     font-family: Times, "Times New Roman", "times-roman", Georgia, Serif
     font-weight: bold
+  img
+    @extend %thumbnail
+    margin: 4px 10px 4px 0
   .channel
+    @extend %link
     font-family: "Gill Sans", Verdana
     text-transform: uppercase
     letter-spacing: 2px
     font-weight: bold
-    @extend %link
-  img
-    @extend %thumbnail
   .empty_entry
+    clear: both
     margin-top: 20px
     text-align: center
     background-color: #c5e8f7
