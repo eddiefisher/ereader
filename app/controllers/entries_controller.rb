@@ -56,6 +56,8 @@ class EntriesController < ApplicationController
       "#{method}r"
     elsif method == 'flag' or method == 'unflag'
       "#{method}g"
+    elsif method == 'read' or method == 'unread'
+      method
     end
   end
 end
