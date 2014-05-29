@@ -14,13 +14,13 @@ class Sanitize < Factory
   end
 
   def sanitize(node, options = {})
-    node.css("form, object, iframe, embed").each do |elem|
+    node.css("form, object, embed").each do |elem|
       elem.remove
     end
 
     node.css("p, a").each do |elem|
       unless elem.css('*').to_a.count > 0
-        elem.remove if elem.content.strip.empty?
+        elem.remove if elem.children.count == 0
       end
     end
 
@@ -41,7 +41,7 @@ class Sanitize < Factory
           break
         else
           if replace_with_whitespace[el.node_name]
-            el.swap(Nokogiri::XML::Text.new(' ' << el.text << ' ', el.document))
+            el.swap(Nokogiri::XML::Text.new(" #{el.text} ", el.document))
           else
             el.swap(Nokogiri::XML::Text.new(el.text, el.document))
           end
