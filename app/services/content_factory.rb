@@ -1,4 +1,4 @@
-Dir[File.dirname(__FILE__) + '/content_filters/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/content_filters/*.rb'].each { |file| require file }
 
 class ContentFactory
   attr_reader :filter, :result
@@ -24,7 +24,7 @@ class ContentFactory
     if class_exists?(class_name)
       class_name.constantize.new
     else
-      raise "Unknow type: #{class_name}"
+      fail "Unknow type: #{class_name}"
     end
   end
 

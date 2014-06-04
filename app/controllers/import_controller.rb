@@ -8,9 +8,7 @@ class ImportController < ApplicationController
     require 'rexml/Document'
 
     @import = Import.new(import_params)
-    if @import.save
-      import_opml @import
-    end
+    import_opml @import if @import.save
     redirect_to import_index_path
   end
 
@@ -20,13 +18,13 @@ class ImportController < ApplicationController
     params.require(:import).permit(:name, :user_id)
   end
 
-  def get_opml_feeds path
+  def get_opml_feeds(path)
     file = File.open(path, 'r')
     opml = REXML::Document.new(file.read)
     opml.elements['opml/body'].elements.map { |el| el.attributes if el.attributes['xmlUrl'] }.compact
   end
 
-  def import_opml data
+  def import_opml(data)
     get_opml_feeds(data.name.current_path).each do |feed|
       Channel.create(
         text: feed['text'],

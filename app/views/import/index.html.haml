@@ -5,9 +5,11 @@
   = f.file_field :name
   = f.submit "Import", data: { :disable_with => 'Importing...' }
 
-- if @imports.present?
-  - @imports.each do |import|
-    .import_item
-      = import.name
-      .date
-        = import.created_at.to_formatted_s(:short)
+.index_imports
+  - if @imports.present?
+    - @imports.each do |import|
+      .index_import
+        .body
+          = import.name
+        .date
+          = import.created_at.to_formatted_s(:short)

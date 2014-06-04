@@ -2,22 +2,26 @@ module EntryReadable
   extend ActiveSupport::Concern
 
   def read(value)
-    $redis.sadd(self.redis_key(:read), value)
+    redis.sadd(redis_key(:read), value)
   end
 
   def unread(value)
-    $redis.srem(self.redis_key(:read), value)
+    redis.srem(redis_key(:read), value)
   end
 
-  def is_readed?(value)
-    $redis.sismember(self.redis_key(:read), value)
+  def readed?(value)
+    redis.sismember(redis_key(:read), value)
   end
 
-  def is_unreaded?(value)
-    !$redis.sismember(self.redis_key(:read), value)
+  def unreaded?(value)
+    !redis.sismember(redis_key(:read), value)
   end
 
   def redis_key(str)
-    "user:#{self.id}:#{str}"
+    "user:#{id}:#{str}"
+  end
+
+  def redis
+    $redis
   end
 end
