@@ -4,6 +4,7 @@
   %small.channel
     = link_to @entry.channel.title, @entry.url, target: '_blank'
     = @entry.published_at.to_formatted_s(:long)
+    = link_to 'View all entries', entries_path(channel_id: @entry.channel_id)
   - if @entry.body.blank?
     .summary
       = preserve do

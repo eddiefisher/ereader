@@ -5,6 +5,8 @@
     = link_to 'Flagged', flagged_entries_path
   %li
     = link_to 'Starred', starred_entries_path
+  %li
+    = link_to 'Channels', channels_path
   / - active_channels.each do |channel|
   /   %li
   /     = link_to channel_entries_path(channel) do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140527090722) do
+ActiveRecord::Schema.define(version: 20140529215425) do
 
   create_table "channels", force: true do |t|
     t.string   "text",          default: "",                  null: false
@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(version: 20140527090722) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "user_channels", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "channel_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_channels", ["user_id", "channel_id"], name: "index_user_channels_on_user_id_and_channel_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

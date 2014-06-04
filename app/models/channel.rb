@@ -1,5 +1,7 @@
 class Channel < ActiveRecord::Base
   has_many :entries
+  has_many :users
+  has_many :users, through: :users
 
   def feed_changed?(feed)
     sha = Digest::SHA2.hexdigest(feed.entries.map{ |f| f.title }.join(' '))

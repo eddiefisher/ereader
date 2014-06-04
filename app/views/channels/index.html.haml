@@ -1,0 +1,7 @@
+.index_channels
+  - @channels.each do |channel|
+    .index_channel
+      .body
+        = channel.title
+      .date
+        = channel.created_at.to_formatted_s(:short)
