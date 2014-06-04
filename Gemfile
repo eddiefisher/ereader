@@ -16,7 +16,7 @@ gem 'bourbon'
 gem 'neat'
 gem 'font-awesome-rails'
 gem 'role-rails'
-
+gem 'kaminari'
 gem 'devise'
 gem 'active_model_serializers'
 
@@ -39,6 +39,7 @@ end
 
 group :development do
   gem 'quiet_assets'
+  gem 'rubocop'
 end
 
 group :test do

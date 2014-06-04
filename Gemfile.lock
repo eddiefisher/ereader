@@ -30,6 +30,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+    ast (2.0.0)
     bcrypt (3.1.7)
     bourbon (3.2.0)
       sass (~> 3.2)
@@ -88,6 +89,9 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
+    kaminari (0.15.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     loofah (1.2.1)
       nokogiri (>= 1.4.4)
     mail (2.5.4)
@@ -104,7 +108,11 @@ GEM
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     orm_adapter (0.5.0)
+    parser (2.1.9)
+      ast (>= 1.1, < 3.0)
+      slop (~> 3.4, >= 3.4.5)
     polyglot (0.3.4)
+    powerpack (0.0.9)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -127,6 +135,7 @@ GEM
       activesupport (= 4.1.0)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    rainbow (2.0.0)
     rake (10.3.1)
     redis (3.0.7)
     redis-namespace (1.4.1)
@@ -149,6 +158,13 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    rubocop (0.23.0)
+      json (>= 1.7.7, < 2)
+      parser (~> 2.1.9)
+      powerpack (~> 0.0.6)
+      rainbow (>= 1.99.1, < 3.0)
+      ruby-progressbar (~> 1.4)
+    ruby-progressbar (1.5.1)
     ruby-readability (0.6.2)
       guess_html_encoding (>= 0.0.4)
       nokogiri (>= 1.4.2)
@@ -173,6 +189,7 @@ GEM
     slim (2.0.2)
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
+    slop (3.5.0)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -221,6 +238,7 @@ DEPENDENCIES
   iconv
   jbuilder (~> 2.0)
   jquery-rails
+  kaminari
   mysql2
   neat
   quiet_assets
@@ -229,6 +247,7 @@ DEPENDENCIES
   role-rails
   rspec
   rspec-rails
+  rubocop
   ruby-readability
   sass-rails (~> 4.0.3)
   sidekiq
