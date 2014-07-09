@@ -1,7 +1,31 @@
 .index_channels
-  - @channels.each do |channel|
+  .head
+    %h3 My channels
+  - if @user_channels.present?
+    - @user_channels.each do |channel|
+      .index_channel
+        .actions
+          / %span.info
+          = link_to '', remove_channel_path(channel), class: :remove
+        .body
+          %span.title
+            = link_to channel.title, entries_channel_path(channel)
+          %span.summary
+            = channel.text
+  - else
+    .empty_channels You have no any channels yet
+
+.index_channels
+  .head
+    %h3 Other channels
+  - @other_channels.each do |channel|
     .index_channel
+      .actions
+        / %span.info
+        / # = link_to '', remove_channel_path(channel), class: :remove
+        = link_to '', add_channel_path(channel), class: :add
       .body
-        = channel.title
-      .date
-        = channel.created_at.to_formatted_s(:short)
+        %span.title
+          = link_to channel.title, entries_channel_path(channel)
+        %span.summary
+          = channel.text

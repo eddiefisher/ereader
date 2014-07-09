@@ -3,20 +3,17 @@ class EntriesController < ApplicationController
   respond_to :html, :js
 
   def index
-    if params.fetch(:channel_id, false)
-      @entries = Entry.where(channel_id: params[:channel_id]).ordering.page(params[:page])
-    else
-      @entries = Entry.where(channel_id: current_user.channel_ids).last_news.ordering
-    end
+    channel_ids = params.fetch(:id, false) ? params[:id] : current_user.channel_ids
+    @entries = Entry.entries(channel_ids, params[:page])
   end
 
   def flagged
-    @entries = current_user.flagged_entry
+    @entries = current_user.flagged_entry.page(params[:page])
     render :index
   end
 
   def starred
-    @entries = current_user.starred_entry
+    @entries = current_user.starred_entry.page(params[:page])
     render :index
   end
 
@@ -42,7 +39,6 @@ class EntriesController < ApplicationController
   end
 
   private
-
   def entry
     @entry = Entry.find(params[:id]) if params[:id]
   end

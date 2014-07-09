@@ -1,12 +1,25 @@
 %ul
   %li
-    = link_to 'Inbox', entries_path
+    = link_to entries_path do
+      Inbox
+      %span.count
+        = current_user.unread_count
+    readed_count
   %li
-    = link_to 'Flagged', flagged_entries_path
+    = link_to flagged_entries_path do
+      Flagged
+      %span.count
+        = current_user.flagged_count
   %li
-    = link_to 'Starred', starred_entries_path
+    = link_to starred_entries_path do
+      Starred
+      %span.count
+        = current_user.starred_count
   %li
-    = link_to 'Channels', channels_path
+    = link_to channels_path do
+      Channels
+      %span.count
+        = current_user.channels.count
   / - active_channels.each do |channel|
   /   %li
   /     = link_to channel_entries_path(channel) do

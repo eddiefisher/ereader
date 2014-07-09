@@ -4,7 +4,8 @@
     - %w{read flag star}.each do |action|
       = button_tag action.capitalize, remote: true, method: :post, type: :submit, name: :method, value: "#{action}"
       = button_tag "Un#{action}", remote: true, method: :post, type: :submit, name: :method, value: "un#{action}"
+    = subscribe_channel(params[:id]) if params.fetch(:id, false)
 
   = render 'entry_list'
-  - if params.fetch(:channel_id, false)
+  - if @entries.present?
     = paginate @entries

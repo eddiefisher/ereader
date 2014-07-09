@@ -17,8 +17,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable
 
-  private
+  def unread_count
+    sum = channels.map { |i| i.entries.count }.sum
+    sum - read_count
+  end
 
+  private
   def set_default_role
     self.role ||= Role.find_by_name('registered')
   end
