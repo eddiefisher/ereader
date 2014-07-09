@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
-  include EntryReadable
-  include EntryFlagable
-  include EntryStarable
+  include RedisInit
+  include RedisReadable
+  include RedisFlagable
+  include RedisStarable
 
   belongs_to :role
   has_many :imports

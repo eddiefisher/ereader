@@ -1,6 +1,4 @@
-module EntryFlagable
-  extend ActiveSupport::Concern
-
+module RedisFlagable
   def flag(value)
     redis.sadd(redis_key(:flag), value)
   end
@@ -17,16 +15,12 @@ module EntryFlagable
     !redis.sismember(redis_key(:flag), value)
   end
 
+  def flagged_count
+    redis.scard(self.redis_key(:flag))
+  end
+
   def flagged_entry
     ids = redis.smembers(redis_key(:flag))
     Entry.where(id: ids)
-  end
-
-  def redis_key(str)
-    "user:#{id}:#{str}"
-  end
-
-  def redis
-    $redis
   end
 end

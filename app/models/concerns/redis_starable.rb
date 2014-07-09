@@ -1,6 +1,4 @@
-module EntryStarable
-  extend ActiveSupport::Concern
-
+module RedisStarable
   def star(value)
     redis.sadd(redis_key(:star), value)
   end
@@ -17,16 +15,12 @@ module EntryStarable
     !redis.sismember(redis_key(:star), value)
   end
 
+  def starred_count
+    redis.scard(self.redis_key(:star))
+  end
+
   def starred_entry
     ids = redis.smembers(redis_key(:star))
     Entry.where(id: ids)
-  end
-
-  def redis_key(str)
-    "user:#{id}:#{str}"
-  end
-
-  def redis
-    $redis
   end
 end
