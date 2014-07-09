@@ -1,3 +1,17 @@
 .index_channels
   .index_channel
-    @extend %entry_list
+    @extend %list
+    .actions
+      width: 1em
+      height: 1em
+      display: inline-block
+      color: #777
+      margin-right: 5px
+      .remove
+        @extend %minus_circle
+      .add
+        @extend %plus_circle
+      .info
+        @extend %info_circle
+  .empty_channels
+    @extend %empty

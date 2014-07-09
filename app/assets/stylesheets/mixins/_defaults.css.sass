@@ -1,7 +1,7 @@
-%entry_list
+%list
   border-bottom: 1px solid #ccc
   background-color: rgba(0, 0, 0, 0.05)
-  padding: 4px
+  padding: 4px 10px
   &:hover, &.read:hover
     background-color: rgba(0, 0, 0, 0.15)
   &.read
@@ -10,7 +10,7 @@
     @extend %truncate
     width: calc(100% - 180px)
     display: inline-block
-    .title a
+    .title, .title a
       color: #373e4a
       text-decoration: none
     .summary
@@ -19,3 +19,19 @@
     width: 100px
     text-align: right
     display: inline-block
+
+%empty
+  clear: both
+  margin-top: 20px
+  text-align: center
+  background-color: #c5e8f7
+  border-color: #c5e8f7
+  color: #2c7ea1
+  padding: 15px
+  margin-bottom: 17px
+  border: 1px solid transparent
+  border-radius: 3px
+  a
+    @extend %button
+    @extend %button_color_blue
+    @extend %button_size_normal

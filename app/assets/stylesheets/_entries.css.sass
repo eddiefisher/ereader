@@ -5,14 +5,20 @@
     color: #333
   a:hover
     color: $dark_red
-  button
+  button, .add a
     @extend %button
-    @extend %button_color_blue
     @extend %button_size_small
+  button
+    @extend %button_color_blue
+  .add a
+    @extend %button_color_primary
+    @extend %plus_circle
+  .square
+    margin-left: 6px
 
 .index_entries
   .index_entry
-    @extend %entry_list
+    @extend %list
     .actions
       width: 70px
       height: 1em
@@ -37,25 +43,18 @@
   .channel
     @extend %link
     font-family: "Gill Sans", Verdana
-    letter-spacing: 2px
+    letter-spacing: 0.5px
     font-weight: bold
     color: #aaa
     a
       color: #666
       text-transform: uppercase
       text-decoration: none
+  .add a
+    @extend %plus_circle
+    color: $dark_green
+  a.view
+    @extend %eye
+    color: $brown
   .empty_entry
-    clear: both
-    margin-top: 20px
-    text-align: center
-    background-color: #c5e8f7
-    border-color: #c5e8f7
-    color: #2c7ea1
-    padding: 15px
-    margin-bottom: 17px
-    border: 1px solid transparent
-    border-radius: 3px
-    a
-      @extend %button
-      @extend %button_color_blue
-      @extend %button_size_normal
+    @extend %empty
