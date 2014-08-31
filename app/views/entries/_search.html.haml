@@ -1,0 +1,5 @@
+= form_tag entries_path, class: "search", method: :get do
+  = search_field_tag :query, params[:query], placeholder: 'Search'
+  = submit_tag "Search"
+  - if params[:query].present?
+    = link_to "Clear", entries_path

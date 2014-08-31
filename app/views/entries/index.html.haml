@@ -1,11 +1,14 @@
-= form_tag batch_actions_entries_path, remote: true do
-  .actions_menu
-    %span.square{ role: 'check_all' }
-    - %w{read flag star}.each do |action|
-      = button_tag action.capitalize, remote: true, method: :post, type: :submit, name: :method, value: "#{action}"
-      = button_tag "Un#{action}", remote: true, method: :post, type: :submit, name: :method, value: "un#{action}"
-    = subscribe_channel(params[:id]) if params.fetch(:id, false)
+.search_container
+  = render 'search'
+.content
+  = form_tag batch_actions_entries_path, remote: true do
+    .actions_menu
+      %span.square{ role: 'check_all' }
+      - %w{read flag star}.each do |action|
+        = button_tag action.capitalize, remote: true, method: :post, type: :submit, name: :method, value: "#{action}"
+        = button_tag "Un#{action}", remote: true, method: :post, type: :submit, name: :method, value: "un#{action}"
+      = subscribe_channel(params[:id]) if params.fetch(:id, false)
 
-  = render 'entry_list'
-  - if @entries.present?
-    = paginate @entries
+    = render 'entry_list'
+    - if @entries.present?
+      = paginate @entries

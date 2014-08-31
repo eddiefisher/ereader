@@ -1,29 +1,22 @@
-%ul
-  %li
-    = link_to entries_path do
-      Inbox
-      %span.count
-        = current_user.unread_count
-    readed_count
-  %li
-    = link_to flagged_entries_path do
-      Flagged
-      %span.count
-        = current_user.flagged_count
-  %li
-    = link_to starred_entries_path do
-      Starred
-      %span.count
-        = current_user.starred_count
-  %li
-    = link_to channels_path do
-      Channels
-      %span.count
-        = current_user.channels.count
-  / - active_channels.each do |channel|
-  /   %li
-  /     = link_to channel_entries_path(channel) do
-  /       = channel.title
-  /       %span{class: "group_color_#{channel.color}"}
-  %li
-    = link_to 'Import from OPML', import_index_path
+- if user_signed_in?
+  %ul
+    %li
+      = link_to entries_path do
+        Inbox
+        %span.count
+          = current_user.unread_count
+      readed_count
+    %li
+      = link_to flagged_entries_path do
+        Flagged
+        %span.count
+          = current_user.flagged_count
+    %li
+      = link_to starred_entries_path do
+        Starred
+        %span.count
+          = current_user.starred_count
+    %li
+      = link_to 'Channels', channels_path
+    %li
+      = link_to 'Import from OPML', import_index_path

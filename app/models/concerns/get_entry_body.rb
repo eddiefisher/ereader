@@ -3,9 +3,9 @@ module GetEntryBody
 
   def get_body
     content = filtered_content
-
     update_attributes(body: content)
     update_attributes(summary: content) if summary.blank?
+    reindex
   end
 
   private
@@ -16,7 +16,6 @@ module GetEntryBody
 
   def filtered_content
     content = ContentFactory.new(source, channel.filters.split(' '))
-
     content.result
   end
 end

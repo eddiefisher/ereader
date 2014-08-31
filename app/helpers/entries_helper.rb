@@ -1,10 +1,6 @@
 module EntriesHelper
-  def active_channels
-    Channel.where(locked: false)
-  end
-
   def subscribed_channel?(channel)
-    current_user.channel_ids.include?(channel.to_i)
+    current_user.user_channel_ids.include?(channel.to_i)
   end
 
   def subscribe_channel(channel)

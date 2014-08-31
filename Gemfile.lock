@@ -60,6 +60,14 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    elasticsearch (1.0.4)
+      elasticsearch-api (= 1.0.4)
+      elasticsearch-transport (= 1.0.4)
+    elasticsearch-api (1.0.4)
+      multi_json
+    elasticsearch-transport (1.0.4)
+      faraday
+      multi_json
     erubis (2.7.0)
     execjs (2.2.1)
     factory_girl (4.4.0)
@@ -183,6 +191,10 @@ GEM
       sprockets-rails (~> 2.0)
     sax-machine (0.2.1)
       nokogiri (~> 1.6.0)
+    searchkick (0.8.2)
+      activemodel
+      elasticsearch (>= 1)
+      hashie
     sidekiq (3.2.2)
       celluloid (>= 0.15.2)
       connection_pool (>= 2.0.0)
@@ -258,6 +270,7 @@ DEPENDENCIES
   rubocop
   ruby-readability
   sass-rails (~> 4.0.3)
+  searchkick
   sidekiq
   sidetiq
   sinatra

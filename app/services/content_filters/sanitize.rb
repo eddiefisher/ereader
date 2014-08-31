@@ -4,7 +4,6 @@ class Sanitize < Factory
   end
 
   private
-
   def content_filter(content)
     content = sanitize(content, readability_options)
     content = content.gsub('<br><blockquote>', '<blockquote>').gsub(/<\/blockquote>(\n)<br>/, '</blockquote>')

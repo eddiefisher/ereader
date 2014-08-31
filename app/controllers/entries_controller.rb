@@ -3,8 +3,9 @@ class EntriesController < ApplicationController
   respond_to :html, :js
 
   def index
-    channel_ids = params.fetch(:id, false) ? params[:id] : current_user.channel_ids
-    @entries = Entry.entries(channel_ids, params[:page])
+    channel_ids = params.fetch(:id, false) ? params[:id] : UserChannel.user_channel_ids(current_user.id)
+    query = params.fetch(:query, false) && !params[:query].blank? ? params[:query] : '*'
+    @entries = Entry.entries(query, channel_ids, params[:page], 29)
   end
 
   def flagged

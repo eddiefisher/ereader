@@ -7,6 +7,7 @@ class RssWorker
   def perform
     Channel.where(locked: false).each do |channel|
       Entry.update_from_feed(channel)
+      Entry.reindex
     end
   end
 end

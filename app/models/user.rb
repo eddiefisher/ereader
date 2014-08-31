@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     sum - read_count
   end
 
+  def self.user_channel_ids
+    UserChannel.user_channel_ids id
+  end
+
   private
   def set_default_role
     self.role ||= Role.find_by_name('registered')

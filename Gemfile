@@ -27,6 +27,7 @@ gem 'demoji'
 gem 'carrierwave'
 gem 'iconv'
 
+gem 'searchkick'
 
 gem 'sidekiq'
 gem 'sidetiq'
