@@ -23,5 +23,6 @@ Rails.application.routes.draw do
   root 'entries#index'
 
   require 'sidekiq/web'
+  require 'sidetiq/web'
   mount Sidekiq::Web, at: '/sidekiq'
 end
